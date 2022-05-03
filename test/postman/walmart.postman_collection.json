@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "e07d3c5a-053e-44b6-9a63-79e78bdab8ad",
+		"name": "walmart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "buscar productos por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/search/1213",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"search",
+						"1213"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buscar productos por texto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/search/abba",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"search",
+						"abba"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
