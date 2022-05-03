@@ -1,10 +1,18 @@
-version: '2'
-services:
-  web:
+version: '3'
+
+services: 
+  walmart-challenge:
+    container_name: search-app
+    restart: always
     build: .
-    command: npm start
-    volumes:
-      - .:/app/
-      - /app/node_modules
     ports:
-      - "3000:3000"
+      - "5000:3000"
+    links: 
+      - mongo
+    volumes:
+      - .:/usr/src/app
+  mongo:
+    container_name: walmart-products
+    image: mongo
+    ports:
+      - "27017:27017"

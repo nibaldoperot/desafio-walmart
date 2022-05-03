@@ -1,9 +1,9 @@
 import express from 'express';
 import expressPinoLogger from 'express-pino-logger';
 import { config } from 'dotenv';
-import swaggerUi from 'swagger-ui-express';
 import log from './src/config/logger';
 import search from './src/components/search';
+import Connection from './database';
 
 // import './swagger_output.json';
 // Configuración dotenv
@@ -18,16 +18,15 @@ const logger = log.logger();
 const app = express();
 
 app.use(loggerMidlleware);
-app.get('/',(req,res) => {
-    res.send('GeeksforGeeks');
-})
+
 // Agrego rutas
 search(app);
 
-app.use('/doc', swaggerUi.serve, swaggerUi.setup('./swagger_output.json'))
+// Agrego conexión a Mongo
+logger.info('Inicio prueba de conexión a Mongo');
+Connection.connect();
 
-
-const PORT = 3000;
+const PORT = process.env.PORT;
   
 app.listen(PORT,() => {
     logger.info(`Running on PORT ${PORT}`);

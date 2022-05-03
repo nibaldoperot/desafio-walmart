@@ -1,5 +1,6 @@
 import dummy from '../../database/dummy';
 import log from "../../config/logger";
+import mongoose from 'mongoose';
 /**
  * Clase para servicios asociados a ls búsqueda
  */
@@ -13,6 +14,8 @@ class SearchService {
     static async search() {
         const logger = log.logger();
         logger.info('consumo datos desde servicio');
+
+        console.log({ models: mongoose.models});
         return dummy.productos;
         
     }
