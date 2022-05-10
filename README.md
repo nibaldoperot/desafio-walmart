@@ -27,12 +27,12 @@ se encuentra en ./test/postman/localhost.postman_environment.json
 
 ## Pruebas unitarias
 ```bash
-npm test
+npm run test
 ```
 
 ## Verificación de errores en código
 ```bash
-npm lint
+npm run lint
 ```
 
 # Pruebas de Performance
