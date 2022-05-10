@@ -48,10 +48,7 @@ class SearchFacade {
             }
             
             // Chequeo condiciones de descuento
-            if( isPalindrome(query) || 
-                products[0] && isPalindrome(products[0].brand) || 
-                products[0] && isPalindrome(products[0].description) ){
-
+            if( products[0] && ( isNaN(query) && isPalindrome(query) || isPalindrome(products[0].brand) || isPalindrome(products[0].description) ) ){
                 logger.info('Aplico descuento palíndromo');
                 products = utils.applyDiscount(products, process.env.DISCOUNT);
             }
