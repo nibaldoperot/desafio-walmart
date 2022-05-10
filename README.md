@@ -3,8 +3,8 @@
 ## Dependencias para levantar el proyecto
 1. Docker
 2. Node v14+
-3. Mongo
-4. Jmeter (sólo para pruebas de performance)
+3. Mongo v3.6.8
+4. Jmeter 5.4.3 (sólo para pruebas de performance)
 5. Extensión bzm - Concurrency Thread Group para Jmeter (sólo para pruebas de performance)
 
 ## Levantando el proyecto
