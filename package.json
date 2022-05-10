@@ -7,8 +7,7 @@
   "scripts": {
     "start": "node --experimental-specifier-resolution=node ./index.js",
     "lint": "esw .  --ext .js",
-    "test": "jest --coverage --maxWorkers=4 --verbose",
-    "doc": "node swagger.js"
+    "test": "jest --testTimeout=10000 --coverage --maxWorkers=4 --verbose"
   },
   "jest": {
     "roots": [
@@ -24,7 +23,8 @@
     "express-pino-logger": "^7.0.0",
     "http": "0.0.1-security",
     "is-palindrome-string": "^1.0.1",
-    "mongoose": "^6.3.2",
+    "mongodb": "^4.5.0",
+    "mongoose": "^5.13.14",
     "nodemon": "^2.0.16",
     "pino": "^7.11.0",
     "pino-pretty": "^7.6.1",

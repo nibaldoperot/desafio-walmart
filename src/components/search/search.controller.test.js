@@ -1,7 +1,6 @@
 import SearchController from './search.controller';
 import mocks from './mocks';
 import SearchFacade from './search.facade';
-
 const getMock = () => {
     const res = {};
     res.status = jest.fn().mockReturnValue(res);

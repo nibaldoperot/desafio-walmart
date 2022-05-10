@@ -19,6 +19,11 @@ export default {
         '0003':{
             message: 'No se encontraron resultados',
             httpCode: 200,
+        },
+        '0004':{
+            message: 'Búsqueda por texto debe ser de más de 3 carácteres',
+            httpCode: 400,
+            errorCode: '0004'
         }
     }
 }

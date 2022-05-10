@@ -2,11 +2,11 @@ export default {
     errorMongo: {
         error:'timeout'
     },
-    productos:[
+    products:[
         {
             id:1000,
             brand: 'sony',
-            description: 'Televisor abba LED 40"',
+            description: 'Televisor abbba LED 40"',
             price: 100
         },
         {

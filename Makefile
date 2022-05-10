@@ -1,16 +1,28 @@
-database-docker-up:
-	docker run -d --rm -e MONGO_INITDB_ROOT_USERNAME=productListUser -e MONGO_INITDB_ROOT_PASSWORD=productListPassword -p 27017:27017 --name walmart-products -v "$(shell pwd)/database":/database mongo:3.6.8
-
-database-provision:
-	docker exec walmart-products bash -c './database/import.sh localhost'
-
-database-up:
-	make database-docker-up
-	make database-provision
-
-database-reset:
-	make database-down
-	make database-up
-
+# database
+sleep-10:
+	sleep 10
+clone-db:
+	git clone https://github.com/walmartdigital/products-db.git db-products-walmart
+up-db:
+	cd db-products-walmart && sudo make database-up
 database-down:
-	docker rm -f walmart-products
+	docker rm -f mongodb-local
+set-db: clone-db up-db sleep-10
+
+
+#docker
+#docker-build:
+#	sudo docker build -t desafio-walmart .
+#docker-up:
+#	sudo docker run -p 4000:3000  desafio-walmart
+#
+#docker-start: docker-build docker-up
+
+
+#start node project
+npm-start:
+	npm run install && npm run start
+
+
+#start db and project
+start: set-db && npm-start

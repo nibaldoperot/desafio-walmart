@@ -1,6 +1,7 @@
-import dummy from '../../database/dummy';
 import log from "../../config/logger";
-import mongoose from 'mongoose';
+import Product from '../../database/models/Product';
+
+
 /**
  * Clase para servicios asociados a ls búsqueda
  */
@@ -11,13 +12,16 @@ class SearchService {
      * @param {JSON} req - Valor asociado al request utilizado 
      * @returns 
      */
-    static async search() {
+    static async getAllProducts() {
         const logger = log.logger();
-        logger.info('consumo datos desde servicio');
-
-        console.log({ models: mongoose.models});
-        return dummy.productos;
-        
+        logger.info('Búsqueda de los datos desde MongoDB');
+        try{
+            const products = await Product.find();
+            return products;
+        }catch(err){
+            logger.error('Error al encontrar datos en MongoDB', {err})
+            throw err;
+        }
     }
 }
 

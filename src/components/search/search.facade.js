@@ -13,18 +13,19 @@ class SearchFacade {
      * @param {JSON} req -  Request ejecutado
      */
     static async search(req) {
-        let data = {};
+        let data;
         const { query } = req.params;
         const logger = log.logger();
         let messageCode = '0000';
         try{
 
-            logger.info('Búsqueda de los datos desde MongoDB');
-            const dummyDB = await SearchService.search(req).catch(error =>{
-                logger.error(error)
+            
+            const allProducts = await SearchService.getAllProducts(req).catch(error =>{
+                logger.error({error})
                 messageCode = '0001';
                 data = { ... params.messages[messageCode] };
             });
+
 
             if(messageCode !== '0000') return data;
 
@@ -32,33 +33,40 @@ class SearchFacade {
 
             // Tipo de búsqeuda por descripción o marca
             if(isNaN(query)){ // eslint-disable-line no-restricted-globals
+                // Búsqueda por string debe ser mayor a largo 4
+                if(query.length < 4){
+                    logger.warn('Búsqueda por texto es demasiado acotada, debe ser de más de 3 carácteres');
+                    messageCode = '0004';
+                    return { ... params.messages[messageCode] };
+                }
                 logger.info('Búsqueda por producto');
-                products = utils.findProduct(dummyDB,query);
+                products = utils.findProduct(allProducts,query);
             // Tipo de búsqueda por ID
             }else{
                 logger.info('Búsqueda por ID');
-                products = utils.findProductById(dummyDB,query);
+                products = utils.findProductById(allProducts,query);
             }
-            let prods = products.map(product => {return {...product}})
-
+            
             // Chequeo condiciones de descuento
-            if(isPalindrome(query)){
+            if( isPalindrome(query) || 
+                products[0] && isPalindrome(products[0].brand) || 
+                products[0] && isPalindrome(products[0].description) ){
+
                 logger.info('Aplico descuento palíndromo');
-                prods = utils.applyDiscount(prods, process.env.DISCOUNT);
+                products = utils.applyDiscount(products, process.env.DISCOUNT);
             }
 
             data = { ... params.messages[messageCode] };
-            data.payload = prods;
+            data.payload = products;
             // Valido si corresponde a que no hubieron resultados
             if(data.payload.length === 0){
                 messageCode = '0003';
                 data = { ... params.messages[messageCode] };
             }
         }catch(error){
-            logger.error(error);
             messageCode = '0002';
             data = { ... params.messages[messageCode] };
-            logger.error({error});
+            logger.error('Error en ejecución de consulta', {error});
         }
 
         return data;

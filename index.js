@@ -3,7 +3,7 @@ import expressPinoLogger from 'express-pino-logger';
 import { config } from 'dotenv';
 import log from './src/config/logger';
 import search from './src/components/search';
-import Connection from './database';
+import Connection from './src/database';
 
 // import './swagger_output.json';
 // Configuración dotenv
@@ -26,7 +26,7 @@ search(app);
 logger.info('Inicio prueba de conexión a Mongo');
 Connection.connect();
 
-const PORT = process.env.PORT;
+const { PORT } = process.env;
   
 app.listen(PORT,() => {
     logger.info(`Running on PORT ${PORT}`);

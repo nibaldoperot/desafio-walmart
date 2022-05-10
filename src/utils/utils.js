@@ -6,7 +6,6 @@
  */
 function findProduct(productsArray, query){
     let results = [];
-    
     results = results.concat(productsArray.filter(product => product.description.indexOf(query) > -1));
     results = results.concat(productsArray.filter(product => product.brand.indexOf(query) > -1));
     return results;
@@ -21,7 +20,7 @@ function findProduct(productsArray, query){
 function applyDiscount(prods, discount){
     prods.forEach(product=>{
         const priceDiscount = product.price * discount;
-        product.price -= priceDiscount;
+        product.price -= priceDiscount; // eslint-disable-line
     });
     return prods;
 }
