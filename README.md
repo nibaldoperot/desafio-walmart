@@ -1,13 +1,13 @@
 # desafio-walmart
 
-## Levantando el proyecto
-
-### Dependencias para levantar el proyecto
+## Dependencias para levantar el proyecto
 1. Docker
 2. Node v14+
 3. Mongo
 4. Jmeter (sólo para pruebas de performance)
 5. Extensión bzm - Concurrency Thread Group para Jmeter (sólo para pruebas de performance)
+
+## Levantando el proyecto
 
 ### Iniciar servicio de docker
 sudo service docker start
